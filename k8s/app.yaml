@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-based-developer-assistant
+  labels:
+    app: mcp-based-developer-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-based-developer-assistant
+  template:
+    metadata:
+      labels:
+        app: mcp-based-developer-assistant
+    spec:
+      containers:
+        - name: api
+          image: mcp-based-developer-assistant:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-based-developer-assistant
+spec:
+  selector:
+    app: mcp-based-developer-assistant
+  ports:
+    - port: 80
+      targetPort: 8080
