@@ -1,5 +1,12 @@
 # MCP-Based Developer Assistant
 
+## Overview
+
+A tool-using developer assistant that exposes three tools through an MCP-style schema: `read_file`, `list_tests` and `run_tests`. `GET /tools` lists them and `POST /call` invokes one, while any request to apply changes is refused. A versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit, and a pytest suite runs in GitHub Actions.
+
+- **Built with:** Python, MCP, pytest, GitHub Actions
+- **Scope:** Local laptop lab; it does not call a hosted model and does not apply production changes.
+
 <!-- project-guide:start -->
 ## Project guide
 
